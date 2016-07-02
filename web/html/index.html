@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+	<title>员工管理系统登录</title>
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/ckform.js"></script>
+    <script type="text/javascript" src="./js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+            background-color: #0769AD;
+        }
+
+        .form-signin {
+            max-width: 300px;
+            padding: 19px 29px 19px;
+            margin: 30px auto 10px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        }
+
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+            font-size: 16px;
+            height: auto;
+            margin-bottom: 15px;
+            padding: 7px 9px;
+        }
+
+		.banner {
+			width: 100%;
+			height: 36px;
+			background-color: #343434;
+			margin-bottom: 20px;
+		}
+    </style>  
+</head>
+<body>
+
+	<div class="banner">
+
+	</div>
+<div class="container">
+
+    <form class="form-signin" method="post" action="/ssh/admin/login.do">
+        <h2 class="form-signin-heading">登入</h2>
+        <input type="text" name="username" class="input-block-level" placeholder="账号">
+        <input type="password" name="passwd" class="input-block-level" placeholder="密码">
+        <p><button class="btn btn-large btn-primary" type="submit" style="float: right;">登录</button></p>
+        <div style="clear:both;"></div>
+    </form>
+
+</div>
+</body>
+<script>
+	$(function() {
+		$('button').click(function(e) {
+			e.preventDefault();
+			var username = $("input[name='username']").val();
+			var passwd = $("input[name='passwd']").val();
+
+			$.ajax({
+				  type: "GET",
+				  url: "/login.do",
+				  data: {username:username,passwd:passwd},
+				  success: function(response) {
+					if(response.result == true){
+						alert("登入成功");
+					}else{
+						alert("密码错误");
+					}
+					
+				  },
+				  error:function(r){
+					alert(r);
+				  }
+				});
+		});
+	});
+
+</script>
+
+</html>
